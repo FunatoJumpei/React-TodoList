@@ -28,7 +28,6 @@ export const InputText = () => {
     setTodos((todos) => {
       const newTodos = todos.map((todo) => {
         if (todo.id === id) {
-          //   todo.value = value; これでは元の配列を変更してしまって、イミュータブルが保てない
           return { ...todo, value: value }; //スプレット構文でコピー展開した上で入れ子のプロパティ値を更新する
         }
         return todo;
