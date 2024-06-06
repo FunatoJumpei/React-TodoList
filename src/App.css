@@ -1,5 +1,17 @@
 .App {
   text-align: center;
+  width: 50%;
+  margin: 8px 8px 12px 10px;
+  padding: 12px;
+  background-color: #282c34;
+  border: solid #61dafb;
+  border-width: 4px;
+  border-radius: 4px;
+}
+
+.text {
+  color: rgb(242, 240, 233);
+  font-size: calc(20px);
 }
 
 .App-logo {

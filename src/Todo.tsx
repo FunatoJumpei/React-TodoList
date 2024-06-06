@@ -6,11 +6,9 @@ import { InputText } from "./component/text";
 function Todo() {
   return (
     <div className="App">
-      <header>
-        <h1>勉強アプリ</h1>
-        {/* <p>勉強した内容を追加</p> */}
-        <InputText />
-      </header>
+      <h1 className="text">勉強アプリ</h1>
+      {/* <p>勉強した内容を追加</p> */}
+      <InputText />
     </div>
   );
 }

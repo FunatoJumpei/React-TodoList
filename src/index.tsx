@@ -3,6 +3,7 @@ import ReactDOM from "react-dom/client";
 import "./index.css";
 import Todo from "./Todo";
 import reportWebVitals from "./reportWebVitals";
+import { InputText } from "./component/text";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement

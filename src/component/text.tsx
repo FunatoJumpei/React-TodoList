@@ -114,6 +114,7 @@ export const InputText = () => {
       >
         <input
           type="text"
+          placeholder="タスクを入力"
           value={text}
           onChange={(e) => handleChange(e)}
           disabled={filter === "checked" || filter === "removed"}
@@ -132,6 +133,7 @@ export const InputText = () => {
               />
               <input
                 type="text"
+                placeholder="タスクを修整"
                 disabled={todo.checked || todo.removed}
                 value={todo.value}
                 onChange={(e) => handleTodo(todo.id, "value", e.target.value)}
