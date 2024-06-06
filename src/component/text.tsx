@@ -24,37 +24,54 @@ export const InputText = () => {
     setText(""); //入力フォーム内を空文字に初期化
   };
 
-  const handleEdit = (id: number, value: string) => {
+  //以下handleEditとhandleCheck, handleRemoveは引数が同じなため、ジェネリクスを用いてまとめることが出来る。
+  // const handleEdit = (id: number, value: string) => {
+  //   setTodos((todos) => {
+  //     const newTodos = todos.map((todo) => {
+  //       if (todo.id === id) {
+  //         return { ...todo, value: value }; //スプレット構文でコピー展開した上で入れ子のプロパティ値を更新する
+  //       }
+  //       return todo;
+  //     });
+  //     return newTodos;
+  //   });
+  // };
+
+  // const handleCheck = (id: number, checked: boolean) => {
+  //   setTodos((todo) => {
+  //     const newTodos = todo.map((todo) => {
+  //       if (todo.id === id) {
+  //         return { ...todo, checked };
+  //       }
+  //       return todo;
+  //     });
+  //     return newTodos;
+  //   });
+  // };
+
+  // const handleRemove = (id: number, removed: boolean) => {
+  //   setTodos((todos) => {
+  //     const newTodos = todos.map((todo) => {
+  //       if (todo.id === id) {
+  //         return { ...todo, removed };
+  //       }
+  //       return todo;
+  //     });
+  //     return newTodos;
+  //   });
+  // };
+  const handleTodo = <K extends keyof Todo, V extends Todo[K]>(
+    id: number,
+    key: K,
+    value: V
+  ) => {
     setTodos((todos) => {
       const newTodos = todos.map((todo) => {
         if (todo.id === id) {
-          return { ...todo, value: value }; //スプレット構文でコピー展開した上で入れ子のプロパティ値を更新する
+          return { ...todo, [key]: value };
+        } else {
+          return todo;
         }
-        return todo;
-      });
-      return newTodos;
-    });
-  };
-
-  const handleCheck = (id: number, checked: boolean) => {
-    setTodos((todo) => {
-      const newTodos = todo.map((todo) => {
-        if (todo.id === id) {
-          return { ...todo, checked };
-        }
-        return todo;
-      });
-      return newTodos;
-    });
-  };
-
-  const handleRemove = (id: number, removed: boolean) => {
-    setTodos((todos) => {
-      const newTodos = todos.map((todo) => {
-        if (todo.id === id) {
-          return { ...todo, removed };
-        }
-        return todo;
       });
       return newTodos;
     });
@@ -111,15 +128,17 @@ export const InputText = () => {
                 type="checkbox"
                 disabled={todo.removed}
                 checked={todo.checked}
-                onChange={() => handleCheck(todo.id, !todo.checked)}
+                onChange={() => handleTodo(todo.id, "checked", !todo.checked)}
               />
               <input
                 type="text"
                 disabled={todo.checked || todo.removed}
                 value={todo.value}
-                onChange={(e) => handleEdit(todo.id, e.target.value)}
+                onChange={(e) => handleTodo(todo.id, "value", e.target.value)}
               />
-              <button onClick={() => handleRemove(todo.id, !todo.removed)}>
+              <button
+                onClick={() => handleTodo(todo.id, "removed", !todo.removed)}
+              >
                 {todo.removed ? "復元" : "削除"}
               </button>
             </div>
